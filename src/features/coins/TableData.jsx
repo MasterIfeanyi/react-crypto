@@ -18,10 +18,10 @@ const TableData = ({ each }) => {
                 </div>
             </td>
             <td className="px-2 py-4 whitespace-nowrap">
-                <p className="symbol">{returnPrice(each["current_price"])}</p>
+                <p className="symbol">{returnPrice(each["current_price"].toFixed(1))}</p>
             </td>
             <td className="px-2 py-4 whitespace-nowrap">
-                <Change change={each["price_change_percentage_24h"]} />
+                <Change change={each["price_change_percentage_24h"].toFixed(1)} />
             </td>
         </tr>
     )
