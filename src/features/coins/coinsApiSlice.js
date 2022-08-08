@@ -8,7 +8,7 @@ export const cryptoApiSlice = apiSlice.injectEndpoints({
                 url: `/coins/markets`,
                 params: {...arg}
             }),
-            providesTags: ["users"],
+            providesTags: ["coins"],
         })
     })
 })

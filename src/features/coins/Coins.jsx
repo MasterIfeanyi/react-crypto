@@ -5,10 +5,10 @@ import { FaArrowRight, FaArrowLeft } from "react-icons/fa"
 
 const Coins = () => {
 
-    const [page, setPage] = useState(3)
+    const [page, setPage] = useState(1);
 
     const queryRequest = {
-        vs_currency: "ngn",
+        vs_currency: "usd",
         order: "market_cap_desc",
         per_page: "10",
         sparkline: "false",

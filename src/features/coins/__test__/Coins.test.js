@@ -95,7 +95,7 @@ test("recieve data from API after button click", async () => {
     const pageNumber = await screen.findByTestId("pageNumber");
 
     await waitFor(() => {
-        expect(pageNumber.textContent).toBe("4")
+        expect(pageNumber.textContent).toBe("Page: 4")
     })
 
     await waitFor(() => {
@@ -128,7 +128,7 @@ test('renders error message if API fails on page load', async () => {
     })
 });
 
-test("disable button if pageNumber is less than zero", async () => {
+test("disable prev button if pageNumber is less than zero", async () => {
     renderWithProviders(<Coins />)
 
     const buttonEl = await screen.findByRole("button",  { name: /Prev/i })
@@ -142,7 +142,7 @@ test("disable button if pageNumber is less than zero", async () => {
     })
 })
 
-test("disable button if pageNumber is greatr than thirty", async () => {
+test("disable next button if pageNumber is greatr than thirty", async () => {
     renderWithProviders(<Coins />)
 
     const buttonEl = await screen.findByRole("button",  { name: /Next/i })
@@ -150,8 +150,35 @@ test("disable button if pageNumber is greatr than thirty", async () => {
     fireEvent.click(buttonEl)
     fireEvent.click(buttonEl)
     fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
+    fireEvent.click(buttonEl)
 
     await waitFor(() => {
-        expect(buttonEl).not.toBeDisabled();
+        expect(buttonEl).toBeDisabled();
     })
 })

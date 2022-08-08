@@ -202,6 +202,9 @@ a:hover {
 .my-image{
   width: unset;
   height: 2rem;
+}
+
+.name-symbol {
   vertical-align: middle;
 }
 

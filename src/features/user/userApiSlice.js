@@ -7,7 +7,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
             query: arg => ({
                 url: `/coins/${arg}`
             }),
-            providesTags: ["user"],
+            providesTags: ["coin"],
         })
     })
 })

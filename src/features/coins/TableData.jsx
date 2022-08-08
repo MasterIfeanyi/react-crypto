@@ -14,7 +14,7 @@ const TableData = ({ each }) => {
                     <a href="/">
                         <img src={each.image} className="me-3 table-image my-image" alt="" />    
                     </a>
-                    <p className="symbol">{ each.name } ({ each.symbol.toUpperCase() }) </p>
+                    <p className="symbol name-symbol">{ each.name } ({ each.symbol.toUpperCase() }) </p>
                 </div>
             </td>
             <td className="px-2 py-4 whitespace-nowrap">
