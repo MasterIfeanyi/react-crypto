@@ -4,7 +4,7 @@ import Change from "./Change"
 const TableData = ({ each }) => {
 
     const returnPrice = (price) => {
-        return `\u20A6 ${Number(price).toLocaleString("en-US")}`;
+        return `\u0024 ${Number(price).toLocaleString("en-US")}`;
     }
 
     return (
