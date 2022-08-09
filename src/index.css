@@ -208,6 +208,43 @@ a:hover {
   vertical-align: middle;
 }
 
+
+form .form-control {
+  color: black;
+  border: black;
+  outline: none;
+  border-radius: 15px;
+  padding: 0.5rem 1rem;
+  background-color: #ddd;
+}
+
+form .form-control:focus {
+  outline: 0;
+  box-shadow: none;
+  background-color: #ddd;
+  border-color: 1px solid red;
+}
+
+.input-group {
+  padding: 6px;
+  background-color: #ddd;
+  border-radius: 15px;
+}
+
+.input-group input {
+  border: black;
+  background-color: transparent;
+  color: black;
+}
+
+.input-group input:focus {
+  box-shadow: black;
+}
+
+.input-group input::placeholder{
+  color: black;
+}
+
 .mexican-wave:before {
 -webkit-animation: mexican-wave .75s infinite ease backwards;
   animation: mexican-wave .75s infinite ease backwards;

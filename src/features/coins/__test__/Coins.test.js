@@ -1,6 +1,6 @@
 import Coins from "../Coins"
 import React from 'react'
-import { fireEvent, screen, waitFor } from '@testing-library/react'
+import { fireEvent, screen, waitFor, act } from '@testing-library/react'
 // We're using our own custom render function and not RTL's render.
 import { renderWithProviders } from '../../../test-utils'
 import { rest } from 'msw';
@@ -9,32 +9,6 @@ import {server} from "../../../mocks/api/server"
 import {apiData} from "../apiData"
 
 
-// [
-//                 { id: 1, name: 'Xabi Alonzo' },
-//                 { id: 2, name: 'Lionel Messi' },
-//                 { id: 3, name: 'Lionel Love' },
-//                 { id: 4, name: 'Lionel Poe' },
-//                 { id: 5, name: 'Lionel Gink' },
-//                 { id: 6, name: 'Lionel Boys' },
-//                 { id: 7, name: 'Lionel Kim' },
-//                 { id: 8, name: 'Lionel Messi' },
-//                 { id: 9, name: 'Lionel Trevor' },
-//                 { id: 10, name: 'Lionel Manny' }
-//             ]
-
-
-// [
-//                     { id: 1, name: 'Junior Alonzo' },
-//                     { id: 2, name: 'Junior Messi' },
-//                     { id: 3, name: 'Junior Love' },
-//                     { id: 4, name: 'Junior Poe' },
-//                     { id: 5, name: 'Junior Gink' },
-//                     { id: 6, name: 'Junior Boys' },
-//                     { id: 7, name: 'Junior Kim' },
-//                     { id: 8, name: 'Junior Messi' },
-//                     { id: 9, name: 'Junior Trevor' },
-//                     { id: 10, name: 'Junior Manny' }
-//                 ]
 
 test("table should render after fetching from API depending on request Query parameters", async () => {
 
@@ -95,7 +69,7 @@ test("recieve data from API after button click", async () => {
     const pageNumber = await screen.findByTestId("pageNumber");
 
     await waitFor(() => {
-        expect(pageNumber.textContent).toBe("Page: 4")
+        expect(pageNumber.textContent).toBe("Page: 2")
     })
 
     await waitFor(() => {
@@ -181,4 +155,51 @@ test("disable next button if pageNumber is greatr than thirty", async () => {
     await waitFor(() => {
         expect(buttonEl).toBeDisabled();
     })
+})
+
+
+test("search for a single coin", async () => {
+
+    server.use(
+        rest.get('*', (req, res, ctx) => {
+            req.url.searchParams.getAll("page")
+            return res(ctx.json([
+                {name: "dogecoin", image: "dogecoin.jpg", current_price: 13000, price_change_percentage_24h: 4.5, symbol: "DGE" }
+            ]))
+        })
+    );
+
+    const table = document.createElement('table')
+        
+    const { container } = renderWithProviders(<Coins />, {
+        container: document.body.appendChild(table),
+    });
+
+
+    const userInputEl = await screen.findByPlaceholderText(/search/i);
+
+    fireEvent.change(userInputEl, {
+        target: {
+            value: "dogecoin"
+        }
+    })
+
+    expect(container).toBeInTheDocument();
+
+
+    await waitFor(() => {
+        expect(userInputEl.value).toBe("dogecoin");
+    })
+
+
+    const allTableBody = await screen.findAllByRole("rowgroup", {}, { timeout: 3000 })
+
+    // await waitFor(() => {
+    //     expect(allTableBody).toBeInTheDocument();
+    // }, {timeout:1600})
+
+
+    await waitFor(() => {
+        expect(allTableBody[1].rows.length).toBe(1);
+    }, {timeout:1600})
 })

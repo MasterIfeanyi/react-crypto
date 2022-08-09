@@ -1,11 +1,18 @@
 import { useState } from 'react'
 import { useGetCoinsQuery } from './coinsApiSlice'
 import TableData from './TableData'
-import { FaArrowRight, FaArrowLeft } from "react-icons/fa"
+import { FaArrowRight, FaArrowLeft, FaSearch } from "react-icons/fa"
+
+import {useGetCoinQuery} from "../coinSearch/coinSearchApiSlice"
+
+import useDebounce from '../../hooks/useDebounce'
 
 const Coins = () => {
 
     const [page, setPage] = useState(1);
+    const [search, setSearch] = useState("");
+
+    const debouncedSearchQuery = useDebounce(search, 500);
 
     const queryRequest = {
         vs_currency: "usd",
@@ -15,6 +22,15 @@ const Coins = () => {
         page
     }
 
+    const coinQueryRequest = {
+        vs_currency: "usd",
+        order: "market_cap_desc",
+        page: "1",
+        sparkline: "false",
+        ids: debouncedSearchQuery,
+        price_change_percentage: "1"
+    }
+
     const {
         data: coins,
         isSuccess,
@@ -22,6 +38,11 @@ const Coins = () => {
         error,
         isLoading
     } = useGetCoinsQuery(queryRequest)
+
+
+    const { data: coinSearchResult, isSuccess: searchedForCoin } = useGetCoinQuery(coinQueryRequest, { skip: debouncedSearchQuery === "" })
+
+    console.log(coinSearchResult);
 
 
     const handlePrevClick = async () => {
@@ -40,6 +61,10 @@ const Coins = () => {
         }
     }
 
+    const handleSubmit = (e) => e.preventDefault();
+
+    const handleSearch = (e) => setSearch(e.target.value)
+
   return ( 
     <section className="section">
         <div className="container">
@@ -50,6 +75,25 @@ const Coins = () => {
                 </div>
             </div>
 
+            <div className="row">
+                <form className="col-lg-6 mx-auto" onSubmit={handleSubmit}>
+                    <div className="input-group">
+                        <input 
+                            type="text" 
+                            placeholder="Search" 
+                            className="form-control"
+                            value={search}
+                            onChange={handleSearch}
+                        />
+                        <button 
+                            className="btn btn-brand" 
+                            type="button" 
+                            id="button" >
+                            <FaSearch />
+                        </button>
+                    </div>
+                </form>
+            </div>
 
             
             <div className="row">
@@ -71,7 +115,9 @@ const Coins = () => {
                       
                     {isError && (<p data-testid="error" className="text-center text-danger">Oh no, there was an error {error.error} </p>)}
 
-                    {isSuccess && (
+
+                    
+                    {/* {searchedForCoin && (
                         <div className="table-responsive">
                             <table className="table tableDesign">
                                 <thead>
@@ -83,9 +129,35 @@ const Coins = () => {
                                 </thead>
 
                                 <tbody className="bg-white" id="tbody">
-                                    {coins.map((each, i) => (
+                                    {coinSearchResult.map((each, i) => (
                                         <TableData key={i} each={each} />
                                     ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    )} */}
+
+                      
+                    { isSuccess && (
+                        <div className="table-responsive">
+                            <table className="table tableDesign">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" className="ps-2 py-3 text-left text-uppercase">Name</th>
+                                        <th scope="col" className="ps-2 py-3 text-left text-uppercase">Latest price</th>
+                                        <th scope="col" className="ps-2 py-3 text-left text-uppercase">Latest change</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody className="bg-white" id="tbody">
+                                    {!searchedForCoin && coins.map((each, i) => (
+                                        <TableData key={i} each={each} />
+                                    ))}
+
+                                    {searchedForCoin && coinSearchResult.map((each, i) => (
+                                        <TableData key={i} each={each} />
+                                    ))}
+                                      
                                 </tbody>
                             </table>
                         </div>

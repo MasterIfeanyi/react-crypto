@@ -10,7 +10,10 @@ export const setupStore = preloadedState => {
     },
     preloadedState,
     middleware: getDefaultMiddleware =>
-        getDefaultMiddleware().concat(apiSlice.middleware),
+        getDefaultMiddleware({
+    immutableCheck: false,
+    serializableCheck: false,
+  }).concat(apiSlice.middleware),
   })
 }
 
