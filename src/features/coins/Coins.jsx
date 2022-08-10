@@ -40,7 +40,7 @@ const Coins = () => {
     } = useGetCoinsQuery(queryRequest)
 
 
-    const { data: coinSearchResult, isError: coinNotFound, isSuccess: searchedForCoin } = useGetCoinQuery(coinQueryRequest, { skip: debouncedSearchQuery === "" })
+    const { data: coinSearchResult, isSuccess: searchedForCoin } = useGetCoinQuery(coinQueryRequest, { skip: debouncedSearchQuery === "" })
 
     console.log(coinSearchResult);
 
