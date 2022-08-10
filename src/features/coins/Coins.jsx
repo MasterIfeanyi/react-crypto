@@ -40,7 +40,7 @@ const Coins = () => {
     } = useGetCoinsQuery(queryRequest)
 
 
-    const { data: coinSearchResult, isSuccess: searchedForCoin } = useGetCoinQuery(coinQueryRequest, { skip: debouncedSearchQuery === "" })
+    const { data: coinSearchResult, isError: coinNotFound, isSuccess: searchedForCoin } = useGetCoinQuery(coinQueryRequest, { skip: debouncedSearchQuery === "" })
 
     console.log(coinSearchResult);
 
@@ -115,27 +115,7 @@ const Coins = () => {
                       
                     {isError && (<p data-testid="error" className="text-center text-danger">Oh no, there was an error {error.error} </p>)}
 
-
                     
-                    {/* {searchedForCoin && (
-                        <div className="table-responsive">
-                            <table className="table tableDesign">
-                                <thead>
-                                    <tr>
-                                        <th scope="col" className="ps-2 py-3 text-left text-uppercase">Name</th>
-                                        <th scope="col" className="ps-2 py-3 text-left text-uppercase">Latest price</th>
-                                        <th scope="col" className="ps-2 py-3 text-left text-uppercase">Latest change</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody className="bg-white" id="tbody">
-                                    {coinSearchResult.map((each, i) => (
-                                        <TableData key={i} each={each} />
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    )} */}
 
                       
                     { isSuccess && (
@@ -157,11 +137,12 @@ const Coins = () => {
                                     {searchedForCoin && coinSearchResult.map((each, i) => (
                                         <TableData key={i} each={each} />
                                     ))}
-                                      
                                 </tbody>
                             </table>
                         </div>
                     )} 
+
+                    {searchedForCoin && coinSearchResult.length === 0 && (<p data-testid="coinError" className="text-center font-weight text-danger">Oh no, coin not found</p>)}
                 </div>                
             </div>
         </div>

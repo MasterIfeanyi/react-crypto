@@ -192,7 +192,7 @@ test("search for a single coin", async () => {
     })
 
 
-    const allTableBody = await screen.findAllByRole("rowgroup", {}, { timeout: 3000 })
+    const allTableBody = await screen.findAllByRole("rowgroup", {}, { timeout: 5000 })
 
     // await waitFor(() => {
     //     expect(allTableBody).toBeInTheDocument();
@@ -202,4 +202,46 @@ test("search for a single coin", async () => {
     await waitFor(() => {
         expect(allTableBody[1].rows.length).toBe(1);
     }, {timeout:1600})
+})
+
+
+test("coin not found", async () => {
+
+server.use(
+        rest.get('*', (req, res, ctx) => {
+            req.url.searchParams.getAll("page")
+            return res(ctx.json([ ]))
+        })
+    );
+
+    const table = document.createElement('table')
+        
+    const { container } = renderWithProviders(<Coins />, {
+        container: document.body.appendChild(table),
+    });
+
+
+    const userInputEl = await screen.findByPlaceholderText(/search/i);
+
+    fireEvent.change(userInputEl, {
+        target: {
+            value: "dogecoin"
+        }
+    })
+
+    expect(container).toBeInTheDocument();
+
+
+    await waitFor(() => {
+        expect(userInputEl.value).toBe("dogecoin");
+    })
+
+
+    const errorEl = await screen.findByTestId("coinError", {}, {timeout: 3000})
+
+
+    await waitFor(() => {
+        expect(errorEl.textContent).toBe("Oh no, coin not found");
+    }, {timeout: 1500})
+
 })
