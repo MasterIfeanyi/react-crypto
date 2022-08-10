@@ -1,6 +1,6 @@
 import Coins from "../Coins"
 import React from 'react'
-import { fireEvent, screen, waitFor, act } from '@testing-library/react'
+import { fireEvent, screen, waitFor } from '@testing-library/react'
 // We're using our own custom render function and not RTL's render.
 import { renderWithProviders } from '../../../test-utils'
 import { rest } from 'msw';
