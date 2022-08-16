@@ -1,12 +1,12 @@
-import Coins from "../Coins"
+import Coins from "../Coins";
 import React from 'react'
-import { fireEvent, screen, waitFor } from '@testing-library/react'
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 // We're using our own custom render function and not RTL's render.
-import { renderWithProviders } from '../../../test-utils'
+import { renderWithProviders } from '../../../test-utils';
 import { rest } from 'msw';
-import {server} from "../../../mocks/api/server"
+import { server } from "../../../mocks/api/server";
+import { apiData } from "../apiData";
 
-import {apiData} from "../apiData"
 
 
 
@@ -24,19 +24,20 @@ test("table should render after fetching from API depending on request Query par
 
     const table = document.createElement('table')
     
+
     const { container } = renderWithProviders(<Coins />, {
         container: document.body.appendChild(table),
     });
 
 
-    const allRows = await screen.findAllByRole("rowgroup")
+    const allTableBody = await screen.findAllByRole("rowgroup")
 
     await waitFor(() => {
         expect(container).toBeInTheDocument();
     })  
 
     await waitFor(() => {
-        expect(allRows[1].rows.length).toBe(10);
+        expect(allTableBody[1].rows.length).toBe(10);
     })
 })
 
@@ -64,7 +65,7 @@ test("recieve data from API after button click", async () => {
 
     fireEvent.click(buttonEl)
 
-    const allRows = await screen.findAllByRole("rowgroup")
+    const allTableBody = await screen.findAllByRole("rowgroup")
 
     const pageNumber = await screen.findByTestId("pageNumber");
 
@@ -77,7 +78,7 @@ test("recieve data from API after button click", async () => {
     })  
 
     await waitFor(() => {
-        expect(allRows[1].rows.length).toBe(10);
+        expect(allTableBody[1].rows.length).toBe(10);
     })
 })
 
@@ -87,7 +88,7 @@ test("recieve data from API after button click", async () => {
 test('renders error message if API fails on page load', async () => {
     server.use(
         rest.get('*', (_req, res, ctx) =>
-            res.once(ctx.status(500), ctx.json(null))
+            res.once(ctx.status(500), ctx.json({message: "baby, there was an error"}))
         )
     );
 
@@ -97,15 +98,24 @@ test('renders error message if API fails on page load', async () => {
         /Oh no, there was an error/i
     );
 
+    const errorMessage = await screen.findByText(/baby, there was an error/i)
+
+    await waitFor(() => {
+        expect(errorMessage.textContent).toBe("baby, there was an error")
+    })
+
     await waitFor(() => {
         expect(errorText).toBeInTheDocument();
     })
 });
 
+
+
+
 test("disable prev button if pageNumber is less than zero", async () => {
     renderWithProviders(<Coins />)
 
-    const buttonEl = await screen.findByRole("button",  { name: /Prev/i })
+    const buttonEl = await screen.findByRole("button", { name: /Prev/i })
 
     fireEvent.click(buttonEl)
     fireEvent.click(buttonEl)
@@ -114,7 +124,10 @@ test("disable prev button if pageNumber is less than zero", async () => {
     await waitFor(() => {
         expect(buttonEl).toBeDisabled();
     })
-})
+});
+
+
+
 
 test("disable next button if pageNumber is greatr than thirty", async () => {
     renderWithProviders(<Coins />)
@@ -155,7 +168,10 @@ test("disable next button if pageNumber is greatr than thirty", async () => {
     await waitFor(() => {
         expect(buttonEl).toBeDisabled();
     })
-})
+});
+
+
+
 
 
 test("search for a single coin", async () => {
@@ -192,7 +208,7 @@ test("search for a single coin", async () => {
     })
 
 
-    const allTableBody = await screen.findAllByRole("rowgroup", {}, { timeout: 5000 })
+    const allTableBody = await screen.findAllByRole("rowgroup", {}, { timeout: 3000 })
 
     // await waitFor(() => {
     //     expect(allTableBody).toBeInTheDocument();
@@ -201,13 +217,13 @@ test("search for a single coin", async () => {
 
     await waitFor(() => {
         expect(allTableBody[1].rows.length).toBe(1);
-    }, {timeout:1600})
+    }, {timeout: 2000})
 })
 
 
 test("coin not found", async () => {
 
-server.use(
+    server.use(
         rest.get('*', (req, res, ctx) => {
             req.url.searchParams.getAll("page")
             return res(ctx.json([ ]))
@@ -237,11 +253,11 @@ server.use(
     })
 
 
-    const errorEl = await screen.findByTestId("coinError", {}, {timeout: 3000})
+    const errorEl = await screen.findByTestId("coinError", {}, {timeout: 2000})
 
 
     await waitFor(() => {
         expect(errorEl.textContent).toBe("Oh no, coin not found");
-    }, {timeout: 1500})
+    }, {timeout: 2000})
 
 })

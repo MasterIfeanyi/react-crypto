@@ -1,11 +1,10 @@
-import { useState } from 'react'
-import { useGetCoinsQuery } from './coinsApiSlice'
-import TableData from './TableData'
-import { FaArrowRight, FaArrowLeft, FaSearch } from "react-icons/fa"
+import { useState } from 'react';
+import { useGetCoinsQuery } from './coinsApiSlice';
+import TableData from './TableData';
+import { FaArrowRight, FaArrowLeft, FaSearch } from "react-icons/fa";
+import { useGetCoinQuery } from "../coinSearch/coinSearchApiSlice";
+import useDebounce from '../../hooks/useDebounce';
 
-import {useGetCoinQuery} from "../coinSearch/coinSearchApiSlice"
-
-import useDebounce from '../../hooks/useDebounce'
 
 const Coins = () => {
 
@@ -27,7 +26,7 @@ const Coins = () => {
         order: "market_cap_desc",
         page: "1",
         sparkline: "false",
-        ids: debouncedSearchQuery,
+        ids: debouncedSearchQuery.toLowerCase(),
         price_change_percentage: "1"
     }
 
@@ -41,8 +40,6 @@ const Coins = () => {
 
 
     const { data: coinSearchResult, isSuccess: searchedForCoin } = useGetCoinQuery(coinQueryRequest, { skip: debouncedSearchQuery === "" })
-
-    console.log(coinSearchResult);
 
 
     const handlePrevClick = async () => {
@@ -63,7 +60,10 @@ const Coins = () => {
 
     const handleSubmit = (e) => e.preventDefault();
 
-    const handleSearch = (e) => setSearch(e.target.value)
+    const handleSearch = (e) => {
+        let lowerCase = e.target.value;
+        setSearch(lowerCase)
+    }
 
   return ( 
     <section className="section">
@@ -99,7 +99,13 @@ const Coins = () => {
             <div className="row">
                 <div className="col-12 intro">
                     <div className="d-flex justify-content-between align-items-center">
-                        <button disabled={page <= 1 ? true : false } onClick={handlePrevClick} className="btn btn-danger form-button"><FaArrowLeft /> Prev</button>
+                        <button 
+                            disabled={page <= 1 ? true : false } 
+                            onClick={handlePrevClick} 
+                            className="btn btn-danger form-button"
+                            >
+                            <FaArrowLeft /> Prev
+                        </button>
 
                         <p data-testid="pageNumber" className="font-weight">Page: {page}</p>
 
@@ -113,7 +119,9 @@ const Coins = () => {
                 <div className="col-12">
                     {isLoading && <div className="mexican-wave text-center my-5"></div>}
                       
-                    {isError && (<p data-testid="error" className="text-center text-danger">Oh no, there was an error {error.error} </p>)}
+                    {isError && (<p data-testid="error" className="text-center text-danger">Oh no, there was an error {JSON.stringify(error.error)} </p>)}
+                      
+                    {/* {isError && (<p data-testid="error" className="text-center text-danger">{error.data.message}</p>)} */}
 
                     
 
@@ -128,6 +136,7 @@ const Coins = () => {
                                         <th scope="col" className="ps-2 py-3 text-left text-uppercase">Latest change</th>
                                     </tr>
                                 </thead>
+
 
                                 <tbody className="bg-white" id="tbody">
                                     {!searchedForCoin && coins.map((each, i) => (

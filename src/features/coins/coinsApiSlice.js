@@ -9,6 +9,7 @@ export const cryptoApiSlice = apiSlice.injectEndpoints({
                 params: {...arg}
             }),
             providesTags: ["coins"],
+            // transformResponse: (response) => response.data
         })
     })
 })
