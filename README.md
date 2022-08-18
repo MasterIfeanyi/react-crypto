@@ -168,7 +168,7 @@ await waitFor(() => {
 You can learn more about RTL(react testing libray) queries [here](https://testing-library.com/docs/dom-testing-library/cheatsheet/#queries)
 
 
-## clear RTK query API state while testing
+## How to clear RTK Query cache in tests between requests when using Mock Service Worker and JestRedux - handling really large state object
 
 ```jaavscript
 afterEach(() => {
@@ -177,3 +177,17 @@ afterEach(() => {
 ```
 
 stackoverflow: [Testing with Jest while using MSW and RTK Query leads to strange error in test](https://stackoverflow.com/questions/69302370/testing-with-jest-while-using-msw-and-rtk-query-leads-to-strange-error-in-test/69310703#69310703)
+
+## Redux - handling really large state object
+
+[SerializableStateInvariantMiddleware and ImmutableStateInvariantMiddleware error](https://stackoverflow.com/a/69624806/17171424)
+
+```javascript
+const store = configureStore({
+  // ...
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    immutableCheck: false,
+    serializableCheck: false,
+  })
+})
+```
