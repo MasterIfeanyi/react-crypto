@@ -166,3 +166,14 @@ await waitFor(() => {
 [react-testing-librarys-waitfor](https://www.anycodings.com/2021/12/react-testing-librarys-waitfor-not.html#findby-queries)
 
 You can learn more about RTL(react testing libray) queries [here](https://testing-library.com/docs/dom-testing-library/cheatsheet/#queries)
+
+
+## clear RTK query API state while testing
+
+```jaavscript
+afterEach(() => {
+  store.dispatch(api.util.resetApiState())
+})
+```
+
+stackoverflow: [Testing with Jest while using MSW and RTK Query leads to strange error in test](https://stackoverflow.com/questions/69302370/testing-with-jest-while-using-msw-and-rtk-query-leads-to-strange-error-in-test/69310703#69310703)
