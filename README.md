@@ -191,3 +191,21 @@ const store = configureStore({
   })
 })
 ```
+
+## Some coins
+
+| Symbol      | Name |
+| ----------- | ----------- |
+| DASH      | Dash       |
+| EAC   | Earthcoin        |
+| EMC   | Emercoin        |
+| FCT   | Factom        |
+| XRP   | Ripple        |
+| XPM   | Primecoin        |
+| VTC   | Vertcoin        |
+| STR   | Stellar        |
+| NVC   | NovaCoin        |
+| NMC   | NameCoin        |
+| FTC   | FeatherCoin        |
+| LD   | Linden Dollar        |
+| DOGE   | DogeCoin        |
