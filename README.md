@@ -130,11 +130,7 @@ GitHub issue: [How to query with multiple parameters](https://github.com/reduxjs
 
 **findBy..**
 
-I am making an API request 500ms after a user stops typing. If the API response returns an empty array, I would like to show an error message of 
-
-`oh no, coin not found`, but remember the API will only return a response 500ms after the user stops typing, we have to account for that delay when using `findByTestId`.
-
-To do that we can pass in a third option for the `findBy*` query to wait longer. [read more about findBy](https://testing-library.com/docs/dom-testing-library/api-async/#findby-queries)
+I am making an API request 500ms after a user stops typing. If the API response returns an empty array, I would like to show an error message of `oh no, coin not found`, but remember the API will only return a response 500ms after the user stops typing, we have to account for that delay when using `findByTestId`. To do that we can pass in a third option for the `findBy*` query to wait longer. [read more about findBy](https://testing-library.com/docs/dom-testing-library/api-async/#findby-queries)
 
 `findBy*` returns a promise, so we can use `async-await` to handle the promise it returns.
 
@@ -170,7 +166,7 @@ You can learn more about RTL(react testing libray) queries [here](https://testin
 
 ## How to clear RTK Query cache in tests between requests when using Mock Service Worker and JestRedux - handling really large state object
 
-```jaavscript
+```javascript
 afterEach(() => {
   store.dispatch(api.util.resetApiState())
 })
