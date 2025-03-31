@@ -1,0 +1,39 @@
+/* Mobile container styles for desktop view */
+@media (min-width: 568px) {
+    .mobile-container {
+      /* iPhone-like dimensions */
+      width: 375px;
+      height: 760px;
+      border-radius: 44px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+    .App {
+      padding: 30px;
+    }
+    .report-categories {
+      max-height: 120px; /* Set a fixed height for the container */
+      overflow-y: auto; /* Enable vertical scrolling */
+      padding-right: 10px; /* Add padding to the right to avoid scrollbar overlap */
+    }
+}
+  
+  /* For actual mobile devices, take up full screen */
+  @media (max-width: 567px) {
+    .mobile-container {
+      width: 100%;
+      height: 100vh;
+      max-width: 100%;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    .App {
+      padding: 0px;
+    }
+    .report-categories {
+      max-height: 200px;
+      overflow-y: auto;
+      padding-right: 10px;
+    }
+}

@@ -1,0 +1,31 @@
+/* splash screen */
+
+
+.splash-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #1DF11D;
+    color: white;
+    opacity: 1;
+    /* visibility: visible; */
+    transition: opacity 2.3s ease-out;
+  }
+  
+.splash-screen.hidden {
+    opacity: 0;
+    /* visibility: hidden; */
+}
+
+
+.splash_logo-container {
+    display: flex;
+    vertical-align: middle;
+}
+
+.splash-logo {
+    width: 30px;
+    height: 30px;
+}
