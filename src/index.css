@@ -160,12 +160,6 @@ a:hover {
 
 
 
-.truncate {
-  /* white-space: nowrap; Prevent text from wrapping to the next line */
-  /* overflow: hidden;    Hide any overflowing text */
-  /* text-overflow: ellipsis; Add ellipses (...) to truncated text */
-  /* max-width: 150px;  */
-}
 
 
 /* table styling */
@@ -271,11 +265,7 @@ table .tableDesign {
   font-weight: 700;
 }
 
-/* .table-image {
-  width: unset;
-} */
-
-.my-image{
+.table-image {
   width: unset;
   height: 1.3rem;
 }

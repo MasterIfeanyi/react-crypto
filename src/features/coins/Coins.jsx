@@ -88,7 +88,7 @@ const Coins = () => {
             
 
             <div className="row my-3">
-                <form className="mx-auto " onSubmit={handleSubmit}>
+                <form className="mx-auto" onSubmit={handleSubmit}>
                     <div className="input-group">
                         <input 
                             type="text" 
@@ -152,9 +152,9 @@ const Coins = () => {
                                 <tbody className="bg-white">
                                     {!searchedForCoin && coins.map((each, i) => (
                                         <tr key={i}>
-                                            <td className="py-3 align-middle">
+                                            <td className="align-middle">
                                                 <a href="/">
-                                                    <img src={each.image} className="me-3 table-image my-image" />    
+                                                    <img src={each.image} className="me-3 table-image" />    
                                                 </a>
                                                 <p className="symbol name-symbol mb-0 truncate">{ each.name }</p>
                                             </td>
