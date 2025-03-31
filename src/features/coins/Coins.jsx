@@ -31,11 +31,11 @@ const Coins = () => {
         page: "1", // limit the page to 1
         sparkline: "false",
         ids: debouncedSearchQuery.toLowerCase(), // get a coin by the ID
-        price_change_percentage: "1"
+        price_change_percentage: "1" 
     }
 
     const {
-        data: coins,
+        data: coins, // all the coins that was fetched or recieved
         isSuccess,
         isError,
         error,
