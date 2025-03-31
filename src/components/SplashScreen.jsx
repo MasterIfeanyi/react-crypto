@@ -6,30 +6,35 @@ const SplashScreen = () => {
 
     const navigate = useNavigate()
 
-  const [visible, setVisible] = useState(true)
+    const [visible, setVisible] = useState(true)
 
-  useEffect(() => {
-    // Redirect to main screen after 3 seconds
-    const timer = setTimeout(() => {
-        // this will set the visibility of the splash screen to false after 2 seconds
-        setVisible(false)
+    useEffect(() => {
+        // Redirect to main screen after 3 seconds
+        const timer = setTimeout(() => {
+            // this will set the visibility of the splash screen to false after 2 seconds
+            setVisible(false)
 
-        // this will navigate to the welcome screen after the transition
-        setTimeout(() => {
-            navigate('/welcome')
-          }, 700)
+            // this will navigate to the welcome screen after the transition
+            setTimeout(() => {
+                navigate('/welcome')
+            }, 700)
 
-    }, 2000)
+        }, 2000)
 
-    return () => clearTimeout(timer)
-  }, [navigate])
+        return () => clearTimeout(timer)
+    }, [navigate])
 
 
 
 
 
   return (
-    <div>SplashScreen</div>
+    <div className={`splash-screen ${visible ? 'visible' : 'hidden'}`}>
+      <div className="splash_logo-container">
+        <img src="./logo.png" alt="logo" className='splash-logo' />
+        <p className='fw-bold fs-2'>OneTrade</p>
+      </div>
+    </div>
   )
 }
 

@@ -8,25 +8,29 @@ import useDebounce from '../../hooks/useDebounce';
 
 const Coins = () => {
 
+    // track the current page
     const [page, setPage] = useState(1);
+
+    // track user search request
     const [search, setSearch] = useState("");
 
+    // make API call 500ms after user stops typing
     const debouncedSearchQuery = useDebounce(search, 500);
 
     const queryRequest = {
-        vs_currency: "usd",
-        order: "market_cap_desc",
-        per_page: "10",
+        vs_currency: "usd", // display price in USD
+        order: "market_cap_desc", // coins by marketcap in descending order
+        per_page: "10", // number of coins per page
         sparkline: "false",
         page
     }
 
     const coinQueryRequest = {
-        vs_currency: "usd",
-        order: "market_cap_desc",
-        page: "1",
+        vs_currency: "usd", // display price in USD 
+        order: "market_cap_desc", // coins by marketcap in descending order
+        page: "1", // limit the page to 1
         sparkline: "false",
-        ids: debouncedSearchQuery.toLowerCase(),
+        ids: debouncedSearchQuery.toLowerCase(), // get a coin by the ID
         price_change_percentage: "1"
     }
 
