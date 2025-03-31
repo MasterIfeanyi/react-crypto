@@ -6,8 +6,13 @@ import { useGetCoinQuery } from "../coinSearch/coinSearchApiSlice";
 import useDebounce from '../../hooks/useDebounce';
 import Header from '../../components/Header';
 import CoinTable from './CoinTable';
+import Change from './Change';
 
 const Coins = () => {
+
+    const returnPrice = (price) => {
+        return `\u0024 ${Number(price).toLocaleString("en-US")}`;
+    }
 
     // track the current page
     const [page, setPage] = useState(1);
@@ -152,15 +157,23 @@ const Coins = () => {
                                 <tbody className="bg-white">
                                     {!searchedForCoin && coins.map((each, i) => (
                                         <tr key={i}>
-                                            <td className="align-middle">
+
+                                            {/* logo and name */}
+                                            <td className="py-3 align-middle text-start d-flex align-items-center">
                                                 <a href="/">
                                                     <img src={each.image} className="me-3 table-image" />    
                                                 </a>
                                                 <p className="symbol name-symbol mb-0 truncate">{ each.name }</p>
                                             </td>
 
-                                            <td>
+                                            {/* current price */}
+                                            <td className='py-3 align-middle text-start'>
+                                                <p className="symbol mb-0">{returnPrice(each["current_price"].toFixed(1))}</p>
+                                            </td>
 
+                                            {/* price change measure */}
+                                            <td className='py-3 align-middle text-start'>
+                                                <Change change={each["price_change_percentage_24h"].toFixed(1)} />
                                             </td>
                                         </tr>
                                     ))}

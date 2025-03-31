@@ -50,10 +50,10 @@ img {
 
 .section {
   background-color: white;
+  height: 100%;
   /* border: 1px solid blue; */
   /* flex: 1; */
   /* padding: 1rem 0.5rem; */
-  height: 100%;
 }
 
 
