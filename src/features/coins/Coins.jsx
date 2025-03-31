@@ -4,7 +4,8 @@ import TableData from './TableData';
 import { FaArrowRight, FaArrowLeft, FaSearch } from "react-icons/fa";
 import { useGetCoinQuery } from "../coinSearch/coinSearchApiSlice";
 import useDebounce from '../../hooks/useDebounce';
-
+import Header from '../../components/Header';
+import CoinTable from './CoinTable';
 
 const Coins = () => {
 
@@ -78,11 +79,16 @@ const Coins = () => {
 
   return ( 
     <section className="section">
+
+
+        <Header />
+
+
         <div className="container">
             
 
-            <div className="row">
-                <form className="col-lg-6 mx-auto" onSubmit={handleSubmit}>
+            <div className="row my-3">
+                <form className="mx-auto " onSubmit={handleSubmit}>
                     <div className="input-group">
                         <input 
                             type="text" 
@@ -121,44 +127,104 @@ const Coins = () => {
             </div>
             
             
-            <div className="row d-flex justify-content-center">
-                <div className="col-12">
-                    {isLoading && <div className="mexican-wave text-center my-5"></div>}
-                      
-                    {isError && (<p data-testid="error" className="text-center text-danger">Oh no, there was an error {JSON.stringify(error.error)} </p>)}
-                      
-                    {/* {isError && (<p data-testid="error" className="text-center text-danger">{error.data.message}</p>)} */}
-
+            <div className="row">
+                
+                {isLoading && <div className="mexican-wave text-center my-5"></div>}
                     
+                {isError && (<p data-testid="error" className="text-center text-danger">Oh no, there was an error {JSON.stringify(error.error)} </p>)}
+                    
+                {/* {isError && (<p data-testid="error" className="text-center text-danger">{error.data.message}</p>)} */}
 
-                      
-                    { isSuccess && (
-                        <div className="table-responsive">
-                            <table className="table tableDesign">
+                {
+                    isSuccess && (
+                        <div className='table-responsive'>
+                            <table className="table table-hover">
                                 <thead>
-                                    <tr>
-                                        <th scope="col" className="py-2 text-left text-uppercase">Name</th>
-                                        <th scope="col" className="py-2 text-left text-uppercase">Latest price</th>
-                                        <th scope="col" className="py-2 text-left text-uppercase">Latest change</th>
+                                    <tr className='border-bottom'>
+                                        <th className="py-3 cursor-pointer">Name</th>
+                                        <th className="py-3 cursor-pointer text-left">Price</th>
+                                        <th className="py-3 cursor-pointer">
+                                            Change
+                                        </th>
                                     </tr>
                                 </thead>
 
-
-                                <tbody className="bg-white" id="tbody">
+                                <tbody className="bg-white">
                                     {!searchedForCoin && coins.map((each, i) => (
-                                        <TableData key={i} each={each} />
-                                    ))}
+                                        <tr key={i}>
+                                            <td className="py-3 align-middle">
+                                                <a href="/">
+                                                    <img src={each.image} className="me-3 table-image my-image" />    
+                                                </a>
+                                                <p className="symbol name-symbol mb-0 truncate">{ each.name }</p>
+                                            </td>
 
-                                    {searchedForCoin && coinSearchResult.map((each, i) => (
-                                        <TableData key={i} each={each} />
+                                            <td>
+
+                                            </td>
+                                        </tr>
                                     ))}
                                 </tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                             </table>
                         </div>
-                    )} 
+                    )
+                }    
 
-                    {searchedForCoin && coinSearchResult.length === 0 && (<p data-testid="coinError" className="text-center font-weight text-danger">Oh no, coin not found</p>)}
-                </div>                
+                      
+                {isSuccess && (
+                    <div 
+                    
+                        // className="table_responsive"
+                        className="table-container"
+                        style={{
+                            height: "calc(100vh - 100px)", // Adjust height to fill the screen minus the header height
+                            overflowY: "auto", // Enable vertical scrolling
+                            overflowX: "auto", // Enable horizontal scrolling
+                            // padding: "1rem",
+                            boxSizing: "border-box",
+                        }}
+                    >
+                        <table 
+                            // className="table tableDesign"
+                            className="table table-striped"
+                            style={{
+                            width: "100%",
+                            borderCollapse: "collapse",
+                            tableLayout: "fixed", // Ensures consistent column widths
+                            }}>
+                            
+
+
+                            <tbody className="bg-white" id="tbody">
+                                {!searchedForCoin && coins.map((each, i) => (
+                                    <CoinTable key={i} each={each} />
+                                ))}
+
+                                {searchedForCoin && coinSearchResult.map((each, i) => (
+                                    <CoinTable key={i} each={each} />
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )} 
+
+                {searchedForCoin && coinSearchResult.length === 0 && (<p data-testid="coinError" className="text-center font-weight text-danger">Oh no, coin not found</p>)}
+                              
             </div>
         </div>
     </section>
