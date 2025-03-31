@@ -9,12 +9,15 @@ const TableData = ({ each }) => {
 
     return (
         <tr className=''>
+
+            {/* logo and name */}
             <td className="whitespace-nowrap align-middle" >
-                <div className="d-flex justify-content-left align-items-center">
+                
+                <div className="d-flex align-items-center">
                     <a href="/">
                         <img src={each.image} className="me-3 table-image my-image" alt="" />    
                     </a>
-                    <p className="symbol name-symbol" style={{ fontSize: "12px" }}>{ each.name }</p>
+                    <p className="symbol name-symbol mb-0" style={{ fontSize: "12px", verticalAlign: "middle" }}>{ each.name }</p>
                 </div>
             </td>
 
