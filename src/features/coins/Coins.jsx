@@ -69,15 +69,17 @@ const Coins = () => {
         setSearch(lowerCase)
     }
 
+    // <div className="row">
+    //     <div className="col-12 intro text-center">
+    //         <h3 className="mt-4">Coins</h3>
+    //         <p className="lead">Every crypto in the world on your screen</p>
+    //     </div>
+    // </div>
+
   return ( 
     <section className="section">
         <div className="container">
-            <div className="row">
-                <div className="col-12 intro text-center">
-                    <h3 className="mt-4">Coins</h3>
-                    <p className="lead">Every crypto in the world on your screen</p>
-                </div>
-            </div>
+            
 
             <div className="row">
                 <form className="col-lg-6 mx-auto" onSubmit={handleSubmit}>

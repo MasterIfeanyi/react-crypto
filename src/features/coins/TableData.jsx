@@ -8,19 +8,23 @@ const TableData = ({ each }) => {
     }
 
     return (
-        <tr>
-            <td className="px-2 py-4 whitespace-nowrap">
-                <div className="d-flex justify-content-left align-items-center text-center">
+        <tr className=''>
+            <td className="whitespace-nowrap align-middle" >
+                <div className="d-flex justify-content-left align-items-center">
                     <a href="/">
                         <img src={each.image} className="me-3 table-image my-image" alt="" />    
                     </a>
-                    <p className="symbol name-symbol">{ each.name } ({ each.symbol.toUpperCase() }) </p>
+                    <p className="symbol name-symbol" style={{ fontSize: "12px" }}>{ each.name }</p>
                 </div>
             </td>
-            <td className="px-2 py-4 whitespace-nowrap">
+
+            {/* current price */}
+            <td className="whitespace-nowrap align-middle" style={{ fontSize: "0.8px" }}>
                 <p className="symbol">{returnPrice(each["current_price"].toFixed(1))}</p>
             </td>
-            <td className="px-2 py-4 whitespace-nowrap">
+
+            {/* price change measure */}
+            <td className="whitespace-nowrap align-middle" style={{ fontSize: "0.8px" }}>
                 <Change change={each["price_change_percentage_24h"].toFixed(1)} />
             </td>
         </tr>

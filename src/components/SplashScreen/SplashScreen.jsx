@@ -16,7 +16,7 @@ const SplashScreen = () => {
 
             // this will navigate to the welcome screen after the transition
             setTimeout(() => {
-                navigate('/welcome')
+                navigate('/coin')
             }, 700)
 
         }, 2000)
