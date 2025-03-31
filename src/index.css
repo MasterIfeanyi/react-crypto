@@ -275,6 +275,7 @@ table .tableDesign {
 .table-image {
   width: unset;
   height: 1.3rem;
+  border-radius: 1000px;
 }
 
 .name-symbol {

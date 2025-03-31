@@ -4,7 +4,7 @@ import TableData from './TableData';
 import { FaArrowRight, FaArrowLeft, FaSearch } from "react-icons/fa";
 import { useGetCoinQuery } from "../coinSearch/coinSearchApiSlice";
 import useDebounce from '../../hooks/useDebounce';
-import Header from '../../components/Header';
+import Header from '../../components/Header/Header';
 import CoinTable from './CoinTable';
 import Change from './Change';
 
@@ -124,7 +124,7 @@ const Coins = () => {
                             <FaArrowLeft /> 
                         </button>
 
-                        <p data-testid="pageNumber" className="font-weight">Page: {page}</p>
+                        {/* <p data-testid="pageNumber" className="font-weight">Page: {page}</p> */}
 
                         <button disabled={page >= 30 ? true : false } onClick={handleNextClick} className="btn btn-primary form-button"> <FaArrowRight /></button>
                     </div>

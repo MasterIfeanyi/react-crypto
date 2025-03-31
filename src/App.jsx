@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
-import Header from './components/Header';
+import Header from './components/Header/Header';
 import Coins from './features/coins/Coins';
 import Layout from './Layout/Layout';
 import SplashScreen from './components/SplashScreen/SplashScreen';
