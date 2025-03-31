@@ -49,8 +49,8 @@ img {
 }
 
 .section {
-  background-color: whitesmoke;
-  border: 1px solid blue;
+  background-color: white;
+  /* border: 1px solid blue; */
   /* flex: 1; */
   /* padding: 1rem 0.5rem; */
   height: 100%;
@@ -158,17 +158,24 @@ a:hover {
   color: var(--color-brand);
 }
 
+table thead th {
+  font-size: 10px;
+}
+
 .tableDesign {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   font-weight: bold;
   font-family: arial;
   border-collapse: collapse;
-  text-align: center;
 }
 
 .table thead th {
   background-color: darkcyan;
   color: #fff;
+}
+
+.table_row td {
+  padding: 10px;
 }
 
 .table th,

@@ -8,7 +8,7 @@ const TableData = ({ each }) => {
     }
 
     return (
-        <tr className=''>
+        <tr className='table_row'>
 
             {/* logo and name */}
             <td className="whitespace-nowrap align-middle" >
@@ -23,7 +23,7 @@ const TableData = ({ each }) => {
 
             {/* current price */}
             <td className="whitespace-nowrap align-middle" style={{ fontSize: "0.8px" }}>
-                <p className="symbol">{returnPrice(each["current_price"].toFixed(1))}</p>
+                <p className="symbol mb-0">{returnPrice(each["current_price"].toFixed(1))}</p>
             </td>
 
             {/* price change measure */}

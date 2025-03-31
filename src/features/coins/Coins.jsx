@@ -137,9 +137,9 @@ const Coins = () => {
                             <table className="table tableDesign">
                                 <thead>
                                     <tr>
-                                        <th scope="col" className="ps-2 py-3 text-left text-uppercase">Name</th>
-                                        <th scope="col" className="ps-2 py-3 text-left text-uppercase">Latest price</th>
-                                        <th scope="col" className="ps-2 py-3 text-left text-uppercase">Latest change</th>
+                                        <th scope="col" className="py-2 text-left text-uppercase">Name</th>
+                                        <th scope="col" className="py-2 text-left text-uppercase">Latest price</th>
+                                        <th scope="col" className="py-2 text-left text-uppercase">Latest change</th>
                                     </tr>
                                 </thead>
 
