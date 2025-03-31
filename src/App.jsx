@@ -9,11 +9,11 @@ import MissingRoute from './utils/MissingRoute';
 
 function App() {
 
-    <main className="App">
-      <Header />
-      <Coins />
-      <Footer />
-    </main>
+    // <main className="App">
+    //   <Header />
+    //   <Coins />
+    //   <Footer />
+    // </main>
 
 
   return (

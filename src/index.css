@@ -25,7 +25,7 @@ body {
 
 ul {
   list-style: none;
-  padding: 0 0.25rem 0.25rem;
+  padding: 0;
 }
 
 li {
@@ -35,7 +35,6 @@ li {
 
 img {
   width: 100%;
-  border-radius: 1000px;
 }
 
 
@@ -48,16 +47,24 @@ img {
   min-height: 100vh;
 }
 
+.coins-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
 .section {
   background-color: white;
   height: 100%;
+  flex: 1;
   /* border: 1px solid blue; */
-  /* flex: 1; */
   /* padding: 1rem 0.5rem; */
 }
 
 
-.Header {
+/* .Header {
   padding: 1rem;
   background-color: #007bff;
 }
@@ -65,7 +72,7 @@ img {
 footer {
   background-color: #007bff;
   text-align: center;
-}
+} */
 
 /* custom styling */
 

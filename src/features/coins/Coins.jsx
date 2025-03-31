@@ -121,12 +121,12 @@ const Coins = () => {
                             onClick={handlePrevClick} 
                             className="btn btn-danger form-button"
                             >
-                            <FaArrowLeft /> Prev
+                            <FaArrowLeft /> 
                         </button>
 
                         <p data-testid="pageNumber" className="font-weight">Page: {page}</p>
 
-                        <button disabled={page >= 30 ? true : false } onClick={handleNextClick} className="btn btn-primary form-button">Next <FaArrowRight /></button>
+                        <button disabled={page >= 30 ? true : false } onClick={handleNextClick} className="btn btn-primary form-button"> <FaArrowRight /></button>
                     </div>
                 </div>
             </div>
@@ -178,28 +178,13 @@ const Coins = () => {
                                         </tr>
                                     ))}
                                 </tbody>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                             </table>
                         </div>
                     )
                 }    
 
                       
-                {isSuccess && (
+                {/* {isSuccess && (
                     <div 
                     
                         // className="table_responsive"
@@ -234,7 +219,7 @@ const Coins = () => {
                             </tbody>
                         </table>
                     </div>
-                )} 
+                )}  */}
 
                 {searchedForCoin && coinSearchResult.length === 0 && (<p data-testid="coinError" className="text-center font-weight text-danger">Oh no, coin not found</p>)}
                               
