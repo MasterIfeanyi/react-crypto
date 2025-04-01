@@ -7,6 +7,8 @@ import useDebounce from '../../hooks/useDebounce';
 import Header from '../../components/Header/Header';
 import CoinTable from './CoinTable';
 import Change from './Change';
+import NavArrows from '../../components/NavArrows/NavArrows';
+import SearchBox from '../../components/SearchBox/SearchBox';
 
 const Coins = () => {
 
@@ -93,44 +95,11 @@ const Coins = () => {
             
             
 
-            <div className="row mt-5">
-                <form className="mx-auto" onSubmit={handleSubmit}>
-                    <div className="input-group">
-                        <input 
-                            type="text" 
-                            placeholder="Search" 
-                            className="form-control"
-                            value={search}
-                            onChange={handleSearch}
-                        />
-                        <button 
-                            className="btn btn-brand" 
-                            type="button" 
-                            id="button" >
-                            <FaSearch />
-                        </button>
-                    </div>
-                </form>
-            </div>
+            <SearchBox handleSearch={handleSearch} handleSubmit={handleSubmit} search={search} />
 
             
-            <div className="row my-3">
-                <div className="col-12 intro">
-                    <div className="d-flex justify-content-between align-items-center">
-                        <button 
-                            disabled={page <= 1 ? true : false } 
-                            onClick={handlePrevClick} 
-                            className="btn btn-danger form-button"
-                            >
-                            <FaArrowLeft /> 
-                        </button>
-
-                        {/* <p data-testid="pageNumber" className="font-weight">Page: {page}</p> */}
-
-                        <button disabled={page >= 30 ? true : false } onClick={handleNextClick} className="btn btn-primary form-button"> <FaArrowRight /></button>
-                    </div>
-                </div>
-            </div>
+            <NavArrows />
+            
             
             
             <div className="row">
