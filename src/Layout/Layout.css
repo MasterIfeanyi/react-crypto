@@ -3,7 +3,8 @@
     .mobile-container {
       /* iPhone-like dimensions */
       width: 375px;
-      height: 100%;
+      height: 760px;
+      /* min-height: 767px; */
       border-radius: 44px;
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
       position: relative;

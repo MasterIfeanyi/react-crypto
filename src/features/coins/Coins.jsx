@@ -83,16 +83,17 @@ const Coins = () => {
     // </div>
 
   return ( 
-    <section className="section">
+    <div className="coin-page">
+
 
 
         <Header />
 
-
         <div className="container">
             
+            
 
-            <div className="row my-3">
+            <div className="row mt-5">
                 <form className="mx-auto" onSubmit={handleSubmit}>
                     <div className="input-group">
                         <input 
@@ -113,7 +114,7 @@ const Coins = () => {
             </div>
 
             
-            <div className="row">
+            <div className="row my-3">
                 <div className="col-12 intro">
                     <div className="d-flex justify-content-between align-items-center">
                         <button 
@@ -142,41 +143,26 @@ const Coins = () => {
 
                 {
                     isSuccess && (
-                        <div className='table-responsive'>
+                        <div className='table-responsive' style={{ height: "100%", minHeight: "767px", overflowY: "auto"}}>
                             <table className="table table-hover">
                                 <thead>
                                     <tr className='border-bottom'>
                                         <th className="py-3 cursor-pointer">Name</th>
-                                        <th className="py-3 cursor-pointer text-left">Price</th>
-                                        <th className="py-3 cursor-pointer">
+                                        <th className="py-3 cursor-pointer text-end">Price</th>
+                                        {/* <th className="py-3 cursor-pointer">
                                             Change
-                                        </th>
+                                        </th> */}
                                     </tr>
                                 </thead>
 
                                 <tbody className="bg-white">
                                     {!searchedForCoin && coins.map((each, i) => (
-                                        <tr key={i}>
-
-                                            {/* logo and name */}
-                                            <td className="py-3 align-middle text-start d-flex align-items-center">
-                                                <a href="/">
-                                                    <img src={each.image} className="me-3 table-image" />    
-                                                </a>
-                                                <p className="symbol name-symbol mb-0 truncate">{ each.name }</p>
-                                            </td>
-
-                                            {/* current price */}
-                                            <td className='py-3 align-middle text-start'>
-                                                <p className="symbol mb-0">{returnPrice(each["current_price"].toFixed(1))}</p>
-                                            </td>
-
-                                            {/* price change measure */}
-                                            <td className='py-3 align-middle text-start'>
-                                                <Change change={each["price_change_percentage_24h"].toFixed(1)} />
-                                            </td>
-                                        </tr>
+                                       <CoinTable key={i} each={each}/> 
                                     ))}
+
+                                    {searchedForCoin && coinSearchResult.map((each, i) => (
+                                        <CoinTable key={i} each={each} />
+                                     ))}
                                 </tbody>
                             </table>
                         </div>
@@ -225,7 +211,7 @@ const Coins = () => {
                               
             </div>
         </div>
-    </section>
+    </div>
   )
 }
 

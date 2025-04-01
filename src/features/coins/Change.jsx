@@ -6,9 +6,9 @@ const Change = ({ change }) => {
     let content;
 
     if (change > 0) {
-        content = (<p className="text-success price mb-0"><FaArrowUp /> {change} %</p>)
+        content = (<p style={{fontSize: "10px"}} className="text-success price mb-0"><FaArrowUp /> {change} %</p>)
     } else {
-        content = (<p className="text-danger price mb-0"><FaArrowDown /> {change} % </p>)
+        content = (<p style={{fontSize: "10px"}} className="text-danger price mb-0"><FaArrowDown /> {change} % </p>)
     }
 
     return content
