@@ -47,13 +47,38 @@ img {
   min-height: 100vh;
 }
 
-.coins-screen {
+.coin-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* flex: 1; */
+  height: 100%;
+  background-color: white;
+  padding-top: 20px;
+  position: relative;
+  z-index: 5;
+}
+
+/* .coins-screen {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
-}
+} */
+
+
+/* .coins-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  background-color: white;
+  height: 100%;
+  height: 100vh;
+} */
 
 .section {
   background-color: white;
@@ -63,16 +88,6 @@ img {
   /* padding: 1rem 0.5rem; */
 }
 
-
-/* .Header {
-  padding: 1rem;
-  background-color: #007bff;
-}
-
-footer {
-  background-color: #007bff;
-  text-align: center;
-} */
 
 /* custom styling */
 
@@ -213,69 +228,7 @@ a:hover {
 
 
 
-/* table thead th {
-  font-size: 10px;
-}
 
-.row .table_responsive {
-  height: 100vh;
-  overflow-y: auto;
-  overflow-x: auto; 
-  width: 100%;
-  box-sizing: border-box;
-}
-
-table .tableDesign {
-  border-collapse: collapse;
-  table-layout: fixed;
-  width: 100%;
-}
-
-.table thead th {
-  background-color: darkcyan;
-  color: #fff;
-} */
-
-/* .table_row td {
-  padding: 10px;
-} */
-
-/* .table th,
-.table td {
-  padding: 2px 2px;
-}
-
-.table tbody tr:nth-of-type(even) {
-  background: #eee;
-}
-
-.table tbody tr:last-of-type {
-  border-bottom: 2px solid darkcyan;
-}
-
-.table-image {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.5s ease;
-  border-radius: 1000px;
-  width: 40px;
-  height: 40px;
-} */
-
-
-
-.coin-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* height: 100%; */
-  flex: 1;
-  background-color: white;
-  padding-top: 20px;
-  position: relative;
-  z-index: 5;
-}
 
 .white-loading {
   background-color: white;
