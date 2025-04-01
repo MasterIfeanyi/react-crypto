@@ -5,7 +5,7 @@ const SearchBox = ({search, handleSearch, handleSubmit}) => {
 
 
   return (
-    <div className="row mt-5">
+    <div className="row">
         <form className="mx-auto" onSubmit={handleSubmit}>
             <div className="input-group">
                 <input 

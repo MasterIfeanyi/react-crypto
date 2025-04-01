@@ -90,15 +90,16 @@ const Coins = () => {
 
 
         <Header />
+        
 
-        <div className="container">
+        <main className="container">
             
             
 
             <SearchBox handleSearch={handleSearch} handleSubmit={handleSubmit} search={search} />
 
             
-            <NavArrows />
+            <NavArrows page={page} handleNextClick={handleNextClick} handlePrevClick={handlePrevClick} />
             
             
             
@@ -179,7 +180,7 @@ const Coins = () => {
                 {searchedForCoin && coinSearchResult.length === 0 && (<p data-testid="coinError" className="text-center font-weight text-danger">Oh no, coin not found</p>)}
                               
             </div>
-        </div>
+        </main>
     </div>
   )
 }

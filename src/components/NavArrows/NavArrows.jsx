@@ -1,9 +1,9 @@
 import React from 'react'
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa"
-import { useGetCoinsQuery } from "../coinSearch/coinSearchApiSlice";    
 
 
-const NavArrows = ({page}) => {
+
+const NavArrows = ({page, handleNextClick, handlePrevClick}) => {
 
 
   return (
