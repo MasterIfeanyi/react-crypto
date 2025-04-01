@@ -31,8 +31,10 @@ const SplashScreen = () => {
   return (
     <div className={`splash-screen ${visible ? 'visible' : 'hidden'}`}>
       <div className="splash_logo-container">
-        <img src="./logo.png" alt="logo" className='splash-logo' />
-        <p className='fw-bold fs-2'>OneTrade</p>
+        <div className="d-flex align-items-center justify-content-center">
+          <img src="./Bitcoin.png" alt="logo" className='splash-logo me-1' />
+        </div>
+        <p className='fw-bold fs-2 h5 mb-0'>CoinsNest</p>
       </div>
     </div>
   )

@@ -22,7 +22,8 @@
 
 .splash_logo-container {
     display: flex;
-    vertical-align: middle;
+    align-items: center;
+    justify-content: center;
 }
 
 .splash-logo {
