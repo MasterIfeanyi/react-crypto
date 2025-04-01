@@ -106,7 +106,7 @@ const Coins = () => {
                 
                 <div className="row">
                     
-                    {isLoading && <div className="mexican-wave text-center my-5"></div>}
+                    {isLoading && <div className="mexican-wave text-center my-5 white-loading"></div>}
                         
                     {isError && (<p data-testid="error" className="text-center text-danger">Oh no, there was an error {JSON.stringify(error.error)} </p>)}
                         
@@ -114,7 +114,7 @@ const Coins = () => {
 
                     {
                         isSuccess && (
-                            <div className='table-responsive' style={{ height: "100%", minHeight: "767px", overflowY: "auto"}}>
+                            <div className='table-responsive cointable_overflow' style={{ height: "100vh"}}>
                                 <table className="table table-hover">
                                     <thead>
                                         <tr className='border-bottom'>

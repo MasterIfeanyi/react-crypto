@@ -13,10 +13,12 @@
     .App {
       padding: 30px;
     }
-    .report-categories {
-      max-height: 120px; /* Set a fixed height for the container */
-      overflow-y: auto; /* Enable vertical scrolling */
-      padding-right: 10px; /* Add padding to the right to avoid scrollbar overlap */
+
+    .cointable_overflow {
+      /* max-height: 500px; Set a fixed height for the container */
+      /* overflow-y: auto; Enable vertical scrolling */
+      /* overflow-x: hidden; */
+      padding-bottom: 30px; /* Add padding to the right to avoid scrollbar overlap */
     }
 }
   
