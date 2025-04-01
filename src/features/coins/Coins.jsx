@@ -85,103 +85,103 @@ const Coins = () => {
     // </div>
 
   return ( 
-    <div className="coin-page">
-
-
-
+    <>
         <Header />
         
+        <div className="coin-page">
 
-        <main className="container">
-            
-            
 
-            <SearchBox handleSearch={handleSearch} handleSubmit={handleSubmit} search={search} />
-
-            
-            <NavArrows page={page} handleNextClick={handleNextClick} handlePrevClick={handlePrevClick} />
-            
-            
-            
-            <div className="row">
+            <main className="container">
                 
-                {isLoading && <div className="mexican-wave text-center my-5"></div>}
-                    
-                {isError && (<p data-testid="error" className="text-center text-danger">Oh no, there was an error {JSON.stringify(error.error)} </p>)}
-                    
-                {/* {isError && (<p data-testid="error" className="text-center text-danger">{error.data.message}</p>)} */}
+                {/* <div className="sticky top-0 z-3">
+                </div> */}
+                
 
-                {
-                    isSuccess && (
-                        <div className='table-responsive' style={{ height: "100%", minHeight: "767px", overflowY: "auto"}}>
-                            <table className="table table-hover">
-                                <thead>
-                                    <tr className='border-bottom'>
-                                        <th className="py-3 cursor-pointer">Name</th>
-                                        <th className="py-3 cursor-pointer text-end">Price</th>
-                                        {/* <th className="py-3 cursor-pointer">
-                                            Change
-                                        </th> */}
-                                    </tr>
-                                </thead>
+                <SearchBox handleSearch={handleSearch} handleSubmit={handleSubmit} search={search}/>
 
-                                <tbody className="bg-white">
+                
+                <NavArrows page={page} handleNextClick={handleNextClick} handlePrevClick={handlePrevClick} />
+                
+                
+                
+                <div className="row">
+                    
+                    {isLoading && <div className="mexican-wave text-center my-5"></div>}
+                        
+                    {isError && (<p data-testid="error" className="text-center text-danger">Oh no, there was an error {JSON.stringify(error.error)} </p>)}
+                        
+                    {/* {isError && (<p data-testid="error" className="text-center text-danger">{error.data.message}</p>)} */}
+
+                    {
+                        isSuccess && (
+                            <div className='table-responsive' style={{ height: "100%", minHeight: "767px", overflowY: "auto"}}>
+                                <table className="table table-hover">
+                                    <thead>
+                                        <tr className='border-bottom'>
+                                            <th className="py-3 cursor-pointer">Name</th>
+                                            <th className="py-3 cursor-pointer text-end">Price</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody className="bg-white">
+                                        {!searchedForCoin && coins.map((each, i) => (
+                                        <CoinTable key={i} each={each}/> 
+                                        ))}
+
+                                        {searchedForCoin && coinSearchResult.map((each, i) => (
+                                            <CoinTable key={i} each={each} />
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        )
+                    }    
+
+                        
+                    {/* {isSuccess && (
+                        <div 
+                        
+                            // className="table_responsive"
+                            className="table-container"
+                            style={{
+                                height: "calc(100vh - 100px)", // Adjust height to fill the screen minus the header height
+                                overflowY: "auto", // Enable vertical scrolling
+                                overflowX: "auto", // Enable horizontal scrolling
+                                // padding: "1rem",
+                                boxSizing: "border-box",
+                            }}
+                        >
+                            <table 
+                                // className="table tableDesign"
+                                className="table table-striped"
+                                style={{
+                                width: "100%",
+                                borderCollapse: "collapse",
+                                tableLayout: "fixed", // Ensures consistent column widths
+                                }}>
+                                
+
+
+                                <tbody className="bg-white" id="tbody">
                                     {!searchedForCoin && coins.map((each, i) => (
-                                       <CoinTable key={i} each={each}/> 
+                                        <CoinTable key={i} each={each} />
                                     ))}
 
                                     {searchedForCoin && coinSearchResult.map((each, i) => (
                                         <CoinTable key={i} each={each} />
-                                     ))}
+                                    ))}
                                 </tbody>
                             </table>
                         </div>
-                    )
-                }    
+                    )}  */}
 
-                      
-                {/* {isSuccess && (
-                    <div 
-                    
-                        // className="table_responsive"
-                        className="table-container"
-                        style={{
-                            height: "calc(100vh - 100px)", // Adjust height to fill the screen minus the header height
-                            overflowY: "auto", // Enable vertical scrolling
-                            overflowX: "auto", // Enable horizontal scrolling
-                            // padding: "1rem",
-                            boxSizing: "border-box",
-                        }}
-                    >
-                        <table 
-                            // className="table tableDesign"
-                            className="table table-striped"
-                            style={{
-                            width: "100%",
-                            borderCollapse: "collapse",
-                            tableLayout: "fixed", // Ensures consistent column widths
-                            }}>
-                            
-
-
-                            <tbody className="bg-white" id="tbody">
-                                {!searchedForCoin && coins.map((each, i) => (
-                                    <CoinTable key={i} each={each} />
-                                ))}
-
-                                {searchedForCoin && coinSearchResult.map((each, i) => (
-                                    <CoinTable key={i} each={each} />
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                )}  */}
-
-                {searchedForCoin && coinSearchResult.length === 0 && (<p data-testid="coinError" className="text-center font-weight text-danger">Oh no, coin not found</p>)}
-                              
-            </div>
-        </main>
-    </div>
+                    {searchedForCoin && coinSearchResult.length === 0 && (<p data-testid="coinError" className="text-center font-weight text-danger">Oh no, coin not found</p>)}
+                                
+                </div>
+            </main>
+        </div>
+    
+    </>
   )
 }
 
