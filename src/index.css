@@ -70,10 +70,6 @@ img {
 
 
 
-
-
-
-
 /* table styling */
 .table-container {
   height: calc(100vh - 100px); /* Full height minus header height */
@@ -115,7 +111,20 @@ img {
 
 
 
+/* custom styling */
 
+
+
+
+
+
+.form-button {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  box-shadow: 2px 2px 5px #000;
+  padding: 0.25rem;
+}
 
 
 .symbol {
@@ -204,7 +213,7 @@ form .form-control:focus {
 
 
 
-/* loading animation */
+
 
 .mexican-wave:before {
 -webkit-animation: mexican-wave .75s infinite ease backwards;
