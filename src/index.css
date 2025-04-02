@@ -62,125 +62,13 @@ img {
 
 
 
-/* .coins-screen {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-} */
-
-
-/* .coins-screen {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  background-color: white;
-  height: 100%;
-  height: 100vh;
-} */
-
 .section {
   background-color: white;
   height: 100%;
   flex: 1;
-  /* border: 1px solid blue; */
-  /* padding: 1rem 0.5rem; */
 }
 
 
-/* custom styling */
-
-
-.text {
-  max-width: 500px;
-}
-
-.intro {
-  margin-bottom: 1rem;
-}
-
-.intro h1 {
-  font-weight: 600;
-}
-
-.font-weight{
-  font-weight: 500;
-}
-
-
-.instructions {
-  font-size: 0.75rem;
-  border-radius: 0.5rem;
-  background: #000;
-  color: #fff;
-  padding: 0.25rem;
-  position: relative;
-  bottom: -10px;
-}
-
-.instructions>svg {
-  margin-right: 0.25rem;
-}
-
-.offscreen {
-  position: absolute;
-  left: -9999px;
-}
-
-.hide {
-  display: none;
-}
-
-.valid {
-  color: limegreen;
-  margin-left: 0.25rem;
-}
-
-.invalid {
-  color: red;
-  margin-left: 0.25rem;
-}
-
-.errmsg {
-  background-color: lightpink;
-  color: firebrick;
-  font-weight: bold;
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.link {
-  color: grey
-}
-
-.active {
-  color: red;
-}
-
-.line {
-  display: inline-block;
-}
-
-.form-button {
-  margin-top: 0.5rem;
-  font-size: 1rem;
-  border-radius: 0.25rem;
-  box-shadow: 2px 2px 5px #000;
-  padding: 0.25rem;
-}
-
-a {
-  text-decoration: none;
-  color: #222;
-  transition: all 0.4s ease;
-}
-
-a:hover {
-  color: var(--color-brand);
-}
 
 
 
@@ -216,10 +104,6 @@ a:hover {
   background-color: #ffffff;
 }
 
-/* .table th {
-  background-color: #f8f9fa;
-  font-weight: bold;
-} */
 
 .table td {
   white-space: nowrap; /* Prevent text wrapping */
@@ -320,7 +204,7 @@ form .form-control:focus {
 
 
 
-
+/* loading animation */
 
 .mexican-wave:before {
 -webkit-animation: mexican-wave .75s infinite ease backwards;
