@@ -25,3 +25,15 @@
 }
 
 
+.white-loading {
+    background-color: white;
+    flex: 1;
+}
+
+.full-height {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    margin-top: 40px;
+}

@@ -7,6 +7,7 @@ import CoinTable from './CoinTable';
 import NavArrows from '../../components/NavArrows/NavArrows';
 import SearchBox from '../../components/SearchBox/SearchBox';
 import "./coins_css/Coins.css"
+import Dots from '../../components/Dots/Dots';
 
 
 const Coins = () => {
@@ -68,10 +69,10 @@ const Coins = () => {
         setSearch(e.target.value)
     }
 
-    // Handle dot click to navigate pages
-    // const handleDotClick = (pageNumber) => {
-    //     setCurrentPage(pageNumber); // Update the current page
-    // };
+
+    const coinsPerPage = 10;
+    const totalPages = coins ? Math.ceil(coins.length / coinsPerPage) : 10;
+
 
   return ( 
     <>
@@ -81,45 +82,32 @@ const Coins = () => {
 
             <main className="container d-flex flex-column flex-grow-1">
               
-                <div className="">
+                <>
 
                     <SearchBox handleSearch={handleSearch} handleSubmit={handleSubmit} search={search}/>
 
                 
-                    <NavArrows page={currentPage} handleNextClick={handleNextClick} handlePrevClick={handlePrevClick} />
+                    {!isError && (
+                        <NavArrows 
+                            page={currentPage} 
+                            handleNextClick={handleNextClick} handlePrevClick={handlePrevClick} 
+                        />
+                    )}
 
-                    <div className="page-indicator">
-                    {Array.from({ length: 2 }).map((_, index) => {
-
-                        // Calculate the page number based on the index and currentPage
-                        // Calculate the page number for each dot
-                        // const pageNumber = Math.max(1, Math.min(10, currentPage - 1 + index));
-
-
-                        // Calculate the page number for each dot
-                        const pageNumber = currentPage + index;
-
-
-                        // Ensure the page number doesn't exceed the maximum (10)
-                        if (pageNumber > 10) return null;
+                    {!isError && (
+                        <Dots 
+                            totalPages={totalPages} 
+                            currentPage={currentPage}
+                            setCurrentPage={setCurrentPage} 
+                        />  
+                    )}
 
 
-                        return (
-                            <div
-                                key={index}
-                                className={`page-dot ${pageNumber === currentPage ? "active" : ""}`}                               
-                            />
-                        )
-                    })}
-                    </div>
-                
-                
-                
-                    
-
-
-
-                    {isLoading && <div className="mexican-wave text-center my-5 white-loading"></div>}
+                    {isLoading && (
+                        <div className="full-height">
+                            <div className="mexican-wave text-center my-5 white-loading"></div>
+                        </div>
+                    )}
                     
                     
                     {searchedForCoin && coinSearchResult.length === 0 && (
@@ -130,37 +118,37 @@ const Coins = () => {
 
 
                     {isError && (
-                        <div className='d-flex flex-grow-1 justify-content-center align-items-center' style={{ height: "100%" }}>
-                            <p data-testid="error" className="text-center text-danger">Oh no, there was an error {JSON.stringify(error.error)} </p>
+                        <div className='full-height'>
+                            <p data-testid="error" className="text-center text-danger">Oh no, there was an error</p>
                         </div>
                     )}
 
 
                     {isSuccess && (
-                    <div className='table-responsive cointable_overflow' style={{ height: "100vh"}}>
-                        <table className="table table-hover">
-                            <thead>
-                                <tr className='border-bottom'>
-                                    <th className="py-3 cursor-pointer">Name</th>
-                                    <th className="py-3 cursor-pointer text-end">Price</th>
-                                </tr>
-                            </thead>
+                        <div className='table-responsive cointable_overflow' style={{ height: "100vh"}}>
+                            <table className="table table-hover">
+                                <thead>
+                                    <tr className='border-bottom'>
+                                        <th className="py-3 cursor-pointer">Name</th>
+                                        <th className="py-3 cursor-pointer text-end">Price</th>
+                                    </tr>
+                                </thead>
 
-                            <tbody className="bg-white">
-                                {!searchedForCoin && coins.map((each, i) => (
-                                <CoinTable key={i} each={each}/> 
-                                ))}
+                                <tbody className="bg-white">
+                                    {!searchedForCoin && coins.map((each, i) => (
+                                    <CoinTable key={i} each={each}/> 
+                                    ))}
 
-                                {searchedForCoin && coinSearchResult.map((each, i) => (
-                                    <CoinTable key={i} each={each} />
-                                ))}
+                                    {searchedForCoin && coinSearchResult.map((each, i) => (
+                                        <CoinTable key={i} each={each} />
+                                    ))}
 
-                            </tbody>
-                        </table>
-                    </div>
+                                </tbody>
+                            </table>
+                        </div>
                     )}                                    
                 
-                </div>
+                </>
             </main>
         </div>
     

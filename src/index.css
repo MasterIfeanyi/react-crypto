@@ -60,6 +60,8 @@ img {
   z-index: 5;
 }
 
+
+
 /* .coins-screen {
   display: flex;
   flex-direction: column;
@@ -230,14 +232,7 @@ a:hover {
 
 
 
-.white-loading {
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-}
+
 
 .symbol {
   font-size: 1rem;

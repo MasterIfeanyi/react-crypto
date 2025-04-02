@@ -7,7 +7,7 @@ const NavArrows = ({page, handleNextClick, handlePrevClick}) => {
 
 
   return (
-    <div className="row my-3">
+    <div className="row my-2">
         <div className="col-12 intro">
             <div className="d-flex justify-content-between align-items-center">
                 <button 
@@ -17,8 +17,6 @@ const NavArrows = ({page, handleNextClick, handlePrevClick}) => {
                     >
                     <FaArrowLeft /> 
                 </button>
-
-                {/* <p data-testid="pageNumber" className="font-weight">Page: {page}</p> */}
 
                 <button disabled={page >= 30 ? true : false } onClick={handleNextClick} className="btn btn-primary form-button"> <FaArrowRight /></button>
             </div>
