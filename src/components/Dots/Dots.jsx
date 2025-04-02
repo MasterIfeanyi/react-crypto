@@ -1,6 +1,6 @@
 import {useState} from 'react'
 
-const Dots = ({totalPages, onPageChange, currentPage, setCurrentPage}) => {
+const Dots = ({totalPages, currentPage, setCurrentPage}) => {
 
    
     // Always show 2 dots
@@ -9,20 +9,32 @@ const Dots = ({totalPages, onPageChange, currentPage, setCurrentPage}) => {
     // Determine the page number for each dot
     const getPageForDot = (dotIndex) => {
         if (dotIndex === 0) {
-            return currentPage === 1 ? 1 : currentPage - 1; // First dot represents the previous page or page 1
+            // First dot represents the previous page or page 1
+            return currentPage === 1 ? 1 : currentPage - 1; 
         }
-        if (dotIndex === 1) {
+        if (dotIndex >= 1) {
             // Second dot represents the current page
-            // return currentPage === totalPages ? totalPages : currentPage + 1; 
-            return currentPage + 1;
+            return currentPage + 1; 
         }
     };
 
-    // const handlePageChange = (pageNumber) => {
-    //     if (pageNumber < 1 || pageNumber > totalPages) return; // Prevent invalid page numbers
-    //     setCurrentPage(pageNumber); // Update the active page
-    //     onPageChange(pageNumber); // Notify parent component of the page change
-    // };
+    const handleDotClick = (dotIndex) => {
+        if (dotIndex === 0) {
+          // First dot always takes us to page 1
+          setCurrentPage(prev => prev - 1);
+        //   onPageChange(1);
+        } else {
+          // Second dot takes us to next page or cycles through pages
+          if (currentPage < totalPages) {
+            setCurrentPage(prev => prev + 1);
+            // onPageChange(currentPage + 1);
+          } else {
+            // If we're on the last page, go back to page 2
+            setCurrentPage(prev => prev + 1);
+            // onPageChange(2);
+          }
+        }
+    };
 
     
 
@@ -33,10 +45,13 @@ const Dots = ({totalPages, onPageChange, currentPage, setCurrentPage}) => {
             // if the index is zero, the dot will be representing the firstPage
             const pageNumber = getPageForDot(index);
 
-            // highlight the current dot
-            const isActive = pageNumber === currentPage;
 
-            
+            // highlight the current dot
+            // const isActive = pageNumber === currentPage;
+
+            // First dot is active when on page 1
+            // Second dot is active when on any other page (2-10)
+            const isActive = (index === 0 && currentPage === 1) || (index === 1 && currentPage > 1);
 
 
             return (
@@ -44,11 +59,14 @@ const Dots = ({totalPages, onPageChange, currentPage, setCurrentPage}) => {
                     key={index}
                     className={`page-dot ${isActive ? 'active' : ''}`}           
                     aria-label={`Page ${pageNumber}`} 
-                    onClick={() => setCurrentPage(pageNumber)}  
+                    // onClick={() => setCurrentPage(pageNumber)}
+                    onClick={() => handleDotClick(index)}  
                     style={{
                         borderRadius: "50%",
                         backgroundColor: isActive ? "#0d6efd" : "#ccc",
-                        cursor: "pointer",
+                        // cursor: "pointer",
+                        cursor: (index === 0 && currentPage === 1) ? 'default' : 'pointer',
+                        transition: "background-color 0.3s ease"
                     }}
                 ></div>
             )
