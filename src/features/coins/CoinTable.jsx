@@ -13,7 +13,7 @@ const CoinTable = ({each}) => {
         {/* logo and name */}
         <td className="py-3 align-middle text-start d-flex align-items-center">
             <a href="/">
-                <img src={each.image} className="me-3 table-image" />    
+                <img src={each.image} alt={`${each.image} logo`} className="me-3 table-image" />    
             </a>
             <p className="symbol name-symbol mb-0 truncate">{ each.name }</p>
         </td>

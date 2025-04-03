@@ -1,7 +1,4 @@
 import React from 'react'
-// import { faSearch, faPhone, faUser, faFileAlt } from "@fortawesome/free-solid-svg-icons"
-import { Search, Shield, Bell, Menu, AlertTriangle, FileText, Clock, MessageSquare, ChevronRight } from "lucide-react"
-// import { Card, Badge, Button, Form } from "react-bootstrap"
 import "./Header.css"
 
 const Header = () => {
