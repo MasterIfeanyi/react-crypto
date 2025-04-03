@@ -15,8 +15,39 @@ const Coins = () => {
     // track the current page
     const [currentPage, setCurrentPage] = useState(1); 
 
-    // const [page, setPage] = useState(1); // track the page number
+    // handle touch motion or swipe action
+    const [touchStart, setTouchStart] = useState(0);
+    const [touchEnd, setTouchEnd] = useState(0);
 
+    
+
+
+    // handle touch start
+    const handleTouchStart = (e) => {
+        setTouchStart(e.targetTouches[0].clientX)
+    }
+
+    // handle Touch Move
+    const handleTouchMove = (e) => {
+        setTouchEnd(e.targetTouches[0].clientX)
+    }
+
+
+    const handleTouchEnd = () => {
+        if(touchStart - touchEnd > 100) {
+            //swipe left
+            if(currentPage < totalPages) {
+                setCurrentPage(prev => prev + 1);
+            }
+        }
+
+        if(touchStart - touchEnd < -100) {
+            // swipe right
+            if(currentPage > 1 ) {
+                setCurrentPage(prev => prev - 1);
+            }
+        }
+    }
 
     // track user search request
     const [search, setSearch] = useState("");
@@ -71,6 +102,7 @@ const Coins = () => {
 
     const coinsPerPage = 10;
     const totalPages = coins ? Math.ceil(coins.length / coinsPerPage) : 10;
+    
 
 
   return ( 
@@ -126,7 +158,15 @@ const Coins = () => {
 
 
                     {isSuccess && (
-                        <div className='table-responsive cointable_overflow' style={{ height: "100vh"}}>
+                        <div 
+                            className='table-responsive cointable_overflow' 
+                            style={{ height: "100vh"}}
+                            onTouchStart={handleTouchStart}
+                            onTouchEnd={handleTouchEnd}
+                            onTouchMove={handleTouchMove}
+                        >
+                            
+                            
                             <table className="table table-hover">
 
                             {!searchedForCoin || (coinSearchResult && coinSearchResult.length > 0) ? (
@@ -139,16 +179,10 @@ const Coins = () => {
                             ) : null}
 
 
-                                {/* <thead>
-                                    <tr className='border-bottom'>
-                                        <th className="py-3 cursor-pointer">Name</th>
-                                        <th className="py-3 cursor-pointer text-end">Price</th>
-                                    </tr>
-                                </thead> */}
 
                                 <tbody className="bg-white">
                                     {!searchedForCoin && coins.map((each, i) => (
-                                    <CoinTable key={i} each={each}/> 
+                                    <CoinTable key={i} each={each} /> 
                                     ))}
 
                                     {searchedForCoin && coinSearchResult.map((each, i) => (
