@@ -118,14 +118,14 @@ const Coins = () => {
                     <SearchBox handleSearch={handleSearch} handleSubmit={handleSubmit} search={search}/>
 
                 
-                    {!isError && (
+                    {!isError && !searchedForCoin && (
                         <NavArrows 
                             page={currentPage} 
                             handleNextClick={handleNextClick} handlePrevClick={handlePrevClick} 
                         />
                     )}
 
-                    {!isError && (
+                    {!isError && !searchedForCoin && (
                         <Dots 
                             totalPages={totalPages} 
                             currentPage={currentPage}
