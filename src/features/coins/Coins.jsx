@@ -47,7 +47,6 @@ const Coins = () => {
         data: coins, // all the coins that was fetched
         isSuccess,
         isError,
-        error,
         isLoading
     } = useGetCoinsQuery(queryRequest)
 
