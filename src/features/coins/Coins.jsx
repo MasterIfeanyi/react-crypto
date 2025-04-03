@@ -110,11 +110,7 @@ const Coins = () => {
                     )}
                     
                     
-                    {searchedForCoin && coinSearchResult.length === 0 && (
-                        <div>
-                            <p data-testid="coinError" className="text-center font-weight text-danger">Oh no, coin not found</p>
-                        </div>
-                    )}
+                    
 
 
                     {isError && (
@@ -123,16 +119,33 @@ const Coins = () => {
                         </div>
                     )}
 
+                    {searchedForCoin && coinSearchResult.length === 0 && (
+                        <div className='text-center mt-4'>
+                            <p className="font-weight text-danger">Oh no, coin not found</p>
+                        </div>
+                    )}
+
 
                     {isSuccess && (
                         <div className='table-responsive cointable_overflow' style={{ height: "100vh"}}>
                             <table className="table table-hover">
+
+                            {!searchedForCoin || (coinSearchResult && coinSearchResult.length > 0) ? (
                                 <thead>
-                                    <tr className='border-bottom'>
+                                    <tr className="border-bottom">
                                         <th className="py-3 cursor-pointer">Name</th>
                                         <th className="py-3 cursor-pointer text-end">Price</th>
                                     </tr>
                                 </thead>
+                            ) : null}
+
+
+                                {/* <thead>
+                                    <tr className='border-bottom'>
+                                        <th className="py-3 cursor-pointer">Name</th>
+                                        <th className="py-3 cursor-pointer text-end">Price</th>
+                                    </tr>
+                                </thead> */}
 
                                 <tbody className="bg-white">
                                     {!searchedForCoin && coins.map((each, i) => (
@@ -142,7 +155,8 @@ const Coins = () => {
                                     {searchedForCoin && coinSearchResult.map((each, i) => (
                                         <CoinTable key={i} each={each} />
                                     ))}
-
+                                    
+                                    
                                 </tbody>
                             </table>
                         </div>
