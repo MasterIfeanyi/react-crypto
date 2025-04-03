@@ -1,6 +1,5 @@
 /* splash screen */
 
-
 .splash-screen {
     display: flex;
     flex-direction: column;
@@ -10,14 +9,11 @@
     background-color: #0500FF;
     color: white;
     opacity: 1;
-    min-height: 100vh;
-    /* visibility: visible; */
     transition: opacity 2.3s ease-out;
-  }
+}
   
 .splash-screen.hidden {
     opacity: 0;
-    /* visibility: hidden; */
 }
 
 

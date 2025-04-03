@@ -43,7 +43,7 @@ img {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background-color: gray;
+  background-color: lightgrey;
   min-height: 100vh;
 }
 
@@ -52,8 +52,7 @@ img {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* flex: 1; */
-  height: 100%;
+  flex: 1;
   background-color: white;
   padding-top: 20px;
   position: relative;
