@@ -15,19 +15,9 @@ const Coins = () => {
 
     // track the current page
     const [currentPage, setCurrentPage] = useState(1); 
+    const [swipeDirection, setSwipeDirection] = useState(null);
 
-    // handle touch motion or swipe action
-    // const [touchStart, setTouchStart] = useState(0);
-    // const [touchEnd, setTouchEnd] = useState(0);
-
-
-    const [swipeDirection, setSwipeDirection] = useState(null)
     
-
-    useEffect(() => {
-        // Trigger fetch request when currentPage changes
-        console.log("Current Page:", currentPage);
-    }, [currentPage]); // Run this effect whenever currentPage changes
 
 
     useEffect(() => {
@@ -37,35 +27,12 @@ const Coins = () => {
           }, 1000)
           return () => clearTimeout(timer)
         }
+
+        console.log("Current Page:", currentPage);
     }, [currentPage, swipeDirection])
 
 
-    // handle touch start
-    // const handleTouchStart = (e) => {
-    //     setTouchStart(e.targetTouches[0].clientX)
-    // }
-
-    // handle Touch Move
-    // const handleTouchMove = (e) => {
-    //     setTouchEnd(e.targetTouches[0].clientX)
-    // }
-
-
-    // const handleTouchEnd = () => {
-    //     if(touchStart - touchEnd > 100) {
-    //         //swipe left
-    //         if(currentPage < totalPages) {
-    //             setCurrentPage(prev => prev + 1);
-    //         }
-    //     }
-
-    //     if(touchStart - touchEnd < -100) {
-    //         // swipe right
-    //         if(currentPage > 1 ) {
-    //             setCurrentPage(prev => prev - 1);
-    //         }
-    //     }
-    // }
+    
 
     // track user search request
     const [search, setSearch] = useState("");
@@ -96,12 +63,12 @@ const Coins = () => {
         data: coins, // all the coins that was fetched
         isSuccess,
         isError,
-        isLoading
+        isLoading,
+        isFetching
     } = useGetCoinsQuery(queryRequest)
 
 
     const { data: coinSearchResult, isSuccess: searchedForCoin } = useGetCoinQuery(coinQueryRequest, { skip: debouncedSearchQuery === "" })
-
 
     
     const handlePrevClick = async () => {
@@ -185,6 +152,17 @@ const Coins = () => {
                     )}
                     
                     
+                    {isFetching ? (
+                        <div className="full-height">
+                            <div className="mexican-wave text-center my-5"></div>
+                        </div>
+                    ) : isError ? (
+                        <div className="full-height">
+                            <p data-testid="error" className="text-center text-danger">
+                                Oh no, there was an error
+                            </p>
+                        </div>
+                    ) : null}
                     
 
 
