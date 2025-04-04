@@ -1,19 +1,49 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import {
+  persistReducer,
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 import { apiSlice } from "./api/apiSlice";
 
 
 
-export const setupStore = preloadedState => {
-  return configureStore({
-    reducer: {
-      [apiSlice.reducerPath]: apiSlice.reducer,
-    },
+const rootReducer = combineReducers({
+  [apiSlice.reducerPath]: apiSlice.reducer,
+})
+
+
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: [apiSlice.reducerPath], // only persist the RTK Query cache
+}
+
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+
+export const setupStore = (preloadedState) => {
+
+  const store = configureStore({
+    reducer: persistedReducer,
     preloadedState,
     middleware: getDefaultMiddleware =>
-        getDefaultMiddleware({
-    immutableCheck: false,
-    serializableCheck: false,
-  }).concat(apiSlice.middleware),
+      getDefaultMiddleware({
+      immutableCheck: false,
+      serializableCheck: false,
+    }).concat(apiSlice.middleware)
   })
+
+
+  const persistor = persistStore(store)
+
+  return { store, persistor } 
 }
 
