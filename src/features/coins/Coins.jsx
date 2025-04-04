@@ -9,7 +9,8 @@ import SearchBox from '../../components/SearchBox/SearchBox';
 import "./coins_css/Coins.css"
 import Dots from '../../components/Dots/Dots';
 import { useSwipeable } from 'react-swipeable';
-
+import { useDispatch } from 'react-redux';
+import { cryptoApiSlice } from './coinsApiSlice';
 
 const Coins = () => {
 
@@ -18,8 +19,10 @@ const Coins = () => {
     const [swipeDirection, setSwipeDirection] = useState(null);
 
     
+    const dispatch = useDispatch();
 
 
+    // change the swipe direction
     useEffect(() => {
         if (swipeDirection) {
           const timer = setTimeout(() => {
@@ -32,7 +35,20 @@ const Coins = () => {
     }, [currentPage, swipeDirection])
 
 
-    
+    // invalidate the cache every 1 hour
+    useEffect(() => {
+        const timer = setInterval(() => {
+          dispatch(
+            cryptoApiSlice.util.invalidateTags([{ type: 'Coins', id: currentPage }])
+          );
+        }, 3600 * 1000); // every 1 hour
+      
+        return () => clearInterval(timer);
+    }, [dispatch, currentPage]);
+
+
+
+
 
     // track user search request
     const [search, setSearch] = useState("");
@@ -129,7 +145,7 @@ const Coins = () => {
                     <SearchBox handleSearch={handleSearch} handleSubmit={handleSubmit} search={search}/>
 
                 
-                    {!isError && !searchedForCoin && (
+                    {!searchedForCoin && (
                         <NavArrows 
                             page={currentPage} 
                             handleNextClick={handleNextClick} handlePrevClick={handlePrevClick} 
@@ -145,25 +161,13 @@ const Coins = () => {
                     )}
 
 
-                    {isLoading && (
+                    {(isFetching || isLoading) && (
                         <div className="full-height">
                             <div className="mexican-wave text-center my-5 white-loading"></div>
                         </div>
                     )}
                     
-                    
-                    {isFetching ? (
-                        <div className="full-height">
-                            <div className="mexican-wave text-center my-5"></div>
-                        </div>
-                    ) : isError ? (
-                        <div className="full-height">
-                            <p data-testid="error" className="text-center text-danger">
-                                Oh no, there was an error
-                            </p>
-                        </div>
-                    ) : null}
-                    
+                                        
 
 
                     {isError && (
@@ -184,9 +188,6 @@ const Coins = () => {
                             className='table-responsive cointable_overflow' 
                             style={{ height: "100vh"}}
                             {...swipeHandlers}
-                            // onTouchStart={handleTouchStart}
-                            // onTouchEnd={handleTouchEnd}
-                            // onTouchMove={handleTouchMove}
                         >
                             
                             

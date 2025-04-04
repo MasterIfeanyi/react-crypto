@@ -8,8 +8,12 @@ export const cryptoApiSlice = apiSlice.injectEndpoints({
                 url: `/coins/markets`,
                 params: {...arg}
             }),
-            providesTags: ["coins"],
-            keepUnusedDataFor: 3600
+            // Provide tags to use for invalidation
+            providesTags: (result, error, arg) => [{ type: 'coins', id: arg.page }],
+            keepUnusedDataFor: 3600,
+
+            // Optional: avoid refetching on remount if within 1 hour
+            refetchOnMountOrArgChange: false
         })
     })
 })
