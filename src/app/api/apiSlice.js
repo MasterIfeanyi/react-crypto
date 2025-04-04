@@ -37,5 +37,7 @@ export const apiSlice = createApi({
     reducerPath: 'myApi',
     baseQuery: customRetryHandler,
     tagTypes: ["coins", "coin"],
-    endpoints: builder => ({})
+    endpoints: builder => ({}),
+    refetchOnMountOrArgChange: false,
+    refetchOnReconnect: false,
 })
