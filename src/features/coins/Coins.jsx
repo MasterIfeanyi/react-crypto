@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useGetCoinsQuery } from './coinsApiSlice';
 import { useGetCoinQuery } from "../coinSearch/coinSearchApiSlice";
 import useDebounce from '../../hooks/useDebounce';
@@ -8,6 +8,7 @@ import NavArrows from '../../components/NavArrows/NavArrows';
 import SearchBox from '../../components/SearchBox/SearchBox';
 import "./coins_css/Coins.css"
 import Dots from '../../components/Dots/Dots';
+import { useSwipeable } from 'react-swipeable';
 
 
 const Coins = () => {
@@ -19,7 +20,24 @@ const Coins = () => {
     const [touchStart, setTouchStart] = useState(0);
     const [touchEnd, setTouchEnd] = useState(0);
 
+
+    const [swipeDirection, setSwipeDirection] = useState(null)
     
+
+    useEffect(() => {
+        // Trigger fetch request when currentPage changes
+        console.log("Current Page:", currentPage);
+    }, [currentPage]); // Run this effect whenever currentPage changes
+
+
+    useEffect(() => {
+        if (swipeDirection) {
+          const timer = setTimeout(() => {
+            setSwipeDirection(null)
+          }, 1000)
+          return () => clearTimeout(timer)
+        }
+    }, [currentPage, swipeDirection])
 
 
     // handle touch start
@@ -85,6 +103,7 @@ const Coins = () => {
     const { data: coinSearchResult, isSuccess: searchedForCoin } = useGetCoinQuery(coinQueryRequest, { skip: debouncedSearchQuery === "" })
 
 
+    
     const handlePrevClick = async () => {
         setCurrentPage(prev => parseInt(prev - 1));
     }
@@ -102,8 +121,33 @@ const Coins = () => {
 
     const coinsPerPage = 10;
     const totalPages = coins ? Math.ceil(coins.length / coinsPerPage) : 10;
-    
 
+    
+    
+    // Configure swipe handlers
+    const swipeHandlers = useSwipeable({
+        onSwipedLeft: () => {
+            setSwipeDirection("left")
+            if (currentPage <= 10) {
+                console.log("swipe left")
+                setCurrentPage(prev => prev - 1)
+            }
+        },
+        onSwipedRight: () => {
+            setSwipeDirection("right")
+            if (currentPage >= 1 ) {
+                console.log("swipe right")
+                setCurrentPage(prev => prev + 1)
+            }
+        },
+        trackMouse: true, // Enable mouse tracking for testing on desktop
+        preventScrollOnSwipe: true,
+        trackTouch: true,
+        delta: 10, // Min distance in px before a swipe is registered
+        swipeDuration: 500, // Max time in ms to detect a swipe
+        touchEventOptions: { passive: false },
+        preventDefaultTouchmoveEvent: true
+    })
 
   return ( 
     <>
@@ -161,9 +205,10 @@ const Coins = () => {
                         <div 
                             className='table-responsive cointable_overflow' 
                             style={{ height: "100vh"}}
-                            onTouchStart={handleTouchStart}
-                            onTouchEnd={handleTouchEnd}
-                            onTouchMove={handleTouchMove}
+                            {...swipeHandlers}
+                            // onTouchStart={handleTouchStart}
+                            // onTouchEnd={handleTouchEnd}
+                            // onTouchMove={handleTouchMove}
                         >
                             
                             
