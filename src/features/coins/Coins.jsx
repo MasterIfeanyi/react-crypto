@@ -128,7 +128,7 @@ const Coins = () => {
     const swipeHandlers = useSwipeable({
         onSwipedLeft: () => {
             setSwipeDirection("left")
-            if (currentPage <= 10) {
+            if (currentPage !== 1 && currentPage <= 10) {
                 console.log("swipe left")
                 setCurrentPage(prev => prev - 1)
             }
