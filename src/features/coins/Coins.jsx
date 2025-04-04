@@ -17,8 +17,8 @@ const Coins = () => {
     const [currentPage, setCurrentPage] = useState(1); 
 
     // handle touch motion or swipe action
-    const [touchStart, setTouchStart] = useState(0);
-    const [touchEnd, setTouchEnd] = useState(0);
+    // const [touchStart, setTouchStart] = useState(0);
+    // const [touchEnd, setTouchEnd] = useState(0);
 
 
     const [swipeDirection, setSwipeDirection] = useState(null)
@@ -41,31 +41,31 @@ const Coins = () => {
 
 
     // handle touch start
-    const handleTouchStart = (e) => {
-        setTouchStart(e.targetTouches[0].clientX)
-    }
+    // const handleTouchStart = (e) => {
+    //     setTouchStart(e.targetTouches[0].clientX)
+    // }
 
     // handle Touch Move
-    const handleTouchMove = (e) => {
-        setTouchEnd(e.targetTouches[0].clientX)
-    }
+    // const handleTouchMove = (e) => {
+    //     setTouchEnd(e.targetTouches[0].clientX)
+    // }
 
 
-    const handleTouchEnd = () => {
-        if(touchStart - touchEnd > 100) {
-            //swipe left
-            if(currentPage < totalPages) {
-                setCurrentPage(prev => prev + 1);
-            }
-        }
+    // const handleTouchEnd = () => {
+    //     if(touchStart - touchEnd > 100) {
+    //         //swipe left
+    //         if(currentPage < totalPages) {
+    //             setCurrentPage(prev => prev + 1);
+    //         }
+    //     }
 
-        if(touchStart - touchEnd < -100) {
-            // swipe right
-            if(currentPage > 1 ) {
-                setCurrentPage(prev => prev - 1);
-            }
-        }
-    }
+    //     if(touchStart - touchEnd < -100) {
+    //         // swipe right
+    //         if(currentPage > 1 ) {
+    //             setCurrentPage(prev => prev - 1);
+    //         }
+    //     }
+    // }
 
     // track user search request
     const [search, setSearch] = useState("");
